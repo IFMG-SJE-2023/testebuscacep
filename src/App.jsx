@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useestado } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Header from './components/header';
 import Footer from './components/footer';
 
-import Icon from './assets/img/icon.svg';
+import Icon from './assets/img/icon.png';
 import './App.css';
 
 export default function App() {
@@ -15,14 +15,14 @@ export default function App() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => response.json())
       .then((data) => {
-        setValue('address', data.logradouro);
-        setValue('neighborhood', data.bairro);
-        setValue('city', data.localidade);
-        setValue('state', data.uf);
+        setValue('rua', data.logradouro);
+        setValue('bairro', data.bairro);
+        setValue('cidade', data.localidade);
+        setValue('estado', data.uf);
         if (data.logradouro) {
           setFocus('number');
         } else {
-          setFocus('address');
+          setFocus('rua');
         }
       });
   }
@@ -34,14 +34,14 @@ export default function App() {
       <main className="main">
         <form className="form">
           <div className="icon">
-            <img src={Icon} alt="Icon" width="20%" />
+            <img src={Icon} alt="Icon" width="10%" />
           </div>
 
           <div className="field">
             <span>CEP</span>
             <input
               type="text"
-              placeholder="Digite o CEP"
+              placeholder="digite o cep"
               className="input"
               {...register('cep')}
               onBlur={checkCep}
@@ -50,12 +50,12 @@ export default function App() {
 
           <div className="field">
             <span>Rua</span>
-            <input type="text" className="input" {...register('address')} />
+            <input type="text" className="input" {...register('rua')} />
           </div>
 
           <div className="field">
             <span>Número</span>
-            <input type="text" className="input" {...register('number')} />
+            <input type="text" className="input" {...register('numero')} />
           </div>
 
           <div className="field">
@@ -63,18 +63,18 @@ export default function App() {
             <input
               type="text"
               className="input"
-              {...register('neighborhood')}
+              {...register('bairro')}
             />
           </div>
 
           <div className="field">
             <span>Cidade</span>
-            <input type="text" className="input" {...register('city')} />
+            <input type="text" className="input" {...register('cidade')} />
           </div>
 
-          <div className="field" style={{ marginBottom: '0px' }}>
+          <div className="field">
             <span>Estado</span>
-            <input type="text" className="input" {...register('state')} />
+            <input type="text" className="input" {...register('estado')} />
           </div>
         </form>
       </main>
